@@ -10,9 +10,9 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="h-10 w-10 rounded-xl gradient-primary flex items-center justify-center">
-                <span className="text-primary-foreground text-xl font-bold">F</span>
+                <span className="text-primary-foreground text-xl font-bold">K</span>
               </div>
-              <span className="text-2xl font-bold">FreshCart</span>
+              <span className="text-2xl font-bold">Klickit</span>
             </div>
             <p className="text-muted-foreground mb-6">
               Empowering local vendors to grow their business online with zero hassle.
@@ -22,9 +22,9 @@ export const Footer = () => {
                 <Phone className="h-4 w-4" />
                 +91 98765 43210
               </a>
-              <a href="mailto:vendors@freshcart.in" className="flex items-center gap-2 text-muted-foreground hover:text-background transition-colors">
+              <a href="mailto:merchants@klickit.in" className="flex items-center gap-2 text-muted-foreground hover:text-background transition-colors">
                 <Mail className="h-4 w-4" />
-                vendors@freshcart.in
+                merchants@klickit.in
               </a>
               <p className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
@@ -68,7 +68,7 @@ export const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-muted-foreground/20 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} FreshCart. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Klickit. All rights reserved.</p>
         </div>
       </div>
     </footer>

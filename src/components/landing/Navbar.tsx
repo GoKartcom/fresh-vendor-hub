@@ -13,11 +13,11 @@ export const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="h-9 w-9 rounded-xl gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground text-lg font-bold">F</span>
+              <span className="text-primary-foreground text-lg font-bold">K</span>
             </div>
-            <span className="text-xl font-bold text-foreground">FreshCart</span>
+            <span className="text-xl font-bold text-foreground">Klickit</span>
             <span className="hidden sm:inline-flex ml-2 text-xs font-medium text-muted-foreground bg-accent px-2 py-0.5 rounded-full">
-              For Vendors
+              Merchant
             </span>
           </Link>
 

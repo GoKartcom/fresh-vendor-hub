@@ -31,7 +31,7 @@ export const Hero = () => {
             </h1>
             
             <p className="mb-8 text-lg text-muted-foreground lg:text-xl max-w-xl mx-auto lg:mx-0">
-              Join 500+ local vendors already using FreshCart to reach more customers, 
+              Join 500+ local vendors already using Klickit to reach more customers, 
               manage inventory easily, and get paid faster. No technology investment required.
             </p>
 
