@@ -1,20 +1,39 @@
 import { useState } from "react";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { AddProductModal } from "@/components/dashboard/AddProductModal";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Search, Plus, Grid, List, MoreVertical, Edit, Trash2 } from "lucide-react";
+import { Search, Plus, Grid, List, MoreVertical, Edit, Trash2, Clock } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
-const productsData = [
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  mrp: number;
+  stock: number;
+  unit: string;
+  description?: string;
+  image: string;
+  available: boolean;
+  views: number;
+  orders: number;
+  availableFrom?: string;
+  availableTo?: string;
+}
+
+const initialProducts: Product[] = [
   {
     id: 1,
     name: "Fresh Tomatoes",
@@ -27,6 +46,8 @@ const productsData = [
     available: true,
     views: 145,
     orders: 28,
+    availableFrom: "09:00",
+    availableTo: "21:00",
   },
   {
     id: 2,
@@ -40,6 +61,8 @@ const productsData = [
     available: true,
     views: 189,
     orders: 45,
+    availableFrom: "08:00",
+    availableTo: "22:00",
   },
   {
     id: 3,
@@ -53,6 +76,8 @@ const productsData = [
     available: true,
     views: 67,
     orders: 12,
+    availableFrom: "09:00",
+    availableTo: "20:00",
   },
   {
     id: 4,
@@ -66,6 +91,8 @@ const productsData = [
     available: false,
     views: 98,
     orders: 22,
+    availableFrom: "07:00",
+    availableTo: "19:00",
   },
   {
     id: 5,
@@ -79,6 +106,8 @@ const productsData = [
     available: true,
     views: 234,
     orders: 67,
+    availableFrom: "06:00",
+    availableTo: "23:00",
   },
   {
     id: 6,
@@ -92,6 +121,8 @@ const productsData = [
     available: true,
     views: 76,
     orders: 18,
+    availableFrom: "08:00",
+    availableTo: "20:00",
   },
 ];
 
@@ -99,6 +130,32 @@ const Products = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleAddProduct = (newProduct: Product) => {
+    setProducts([newProduct, ...products]);
+    toast.success("Product added successfully!");
+  };
+
+  const handleDeleteProduct = (productId: number) => {
+    setProducts(products.filter((p) => p.id !== productId));
+    toast.success("Product deleted successfully!");
+  };
+
+  const handleToggleAvailable = (productId: number) => {
+    setProducts(
+      products.map((p) =>
+        p.id === productId ? { ...p, available: !p.available } : p
+      )
+    );
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -138,7 +195,7 @@ const Products = () => {
               <h1 className="text-2xl font-bold text-foreground">Products</h1>
               <p className="text-muted-foreground">Manage your product catalog</p>
             </div>
-            <Button variant="hero">
+            <Button variant="hero" onClick={() => setAddModalOpen(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Add Product
             </Button>
@@ -148,7 +205,12 @@ const Products = () => {
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search products..." className="pl-9" />
+              <Input
+                placeholder="Search products..."
+                className="pl-9"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
             <div className="flex gap-2">
               <Button
@@ -181,7 +243,7 @@ const Products = () => {
             "grid gap-4",
             viewMode === "grid" ? "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"
           )}>
-            {productsData.map((product) => (
+            {filteredProducts.map((product) => (
               <div
                 key={product.id}
                 className={cn(
@@ -229,7 +291,10 @@ const Products = () => {
                           <Edit className="h-4 w-4 mr-2" />
                           Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
+                        <DropdownMenuItem
+                          className="text-destructive"
+                          onClick={() => handleDeleteProduct(product.id)}
+                        >
                           <Trash2 className="h-4 w-4 mr-2" />
                           Delete
                         </DropdownMenuItem>
@@ -245,6 +310,14 @@ const Products = () => {
                     </span>
                   </div>
 
+                  {/* Timings */}
+                  {product.availableFrom && product.availableTo && (
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3">
+                      <Clock className="h-3 w-3" />
+                      <span>{product.availableFrom} - {product.availableTo}</span>
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between">
                     <div className="text-sm text-muted-foreground">
                       Stock: <span className={cn(
@@ -256,7 +329,10 @@ const Products = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-muted-foreground">Available</span>
-                      <Switch checked={product.available} />
+                      <Switch
+                        checked={product.available}
+                        onCheckedChange={() => handleToggleAvailable(product.id)}
+                      />
                     </div>
                   </div>
 
@@ -270,8 +346,20 @@ const Products = () => {
               </div>
             ))}
           </div>
+
+          {filteredProducts.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No products found</p>
+            </div>
+          )}
         </main>
       </div>
+
+      <AddProductModal
+        open={addModalOpen}
+        onOpenChange={setAddModalOpen}
+        onAddProduct={handleAddProduct}
+      />
     </div>
   );
 };

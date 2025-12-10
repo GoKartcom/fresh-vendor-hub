@@ -49,7 +49,7 @@ const Login = () => {
     setIsLoading(false);
     toast({
       title: "Login Successful!",
-      description: "Welcome back to FreshCart",
+      description: "Welcome back to Klickit Merchant",
     });
     navigate("/dashboard");
   };
@@ -61,9 +61,9 @@ const Login = () => {
         <div className="max-w-md text-primary-foreground animate-fade-in">
           <div className="flex items-center gap-3 mb-8">
             <div className="h-14 w-14 rounded-2xl bg-primary-foreground/20 flex items-center justify-center">
-              <span className="text-3xl font-bold">F</span>
+              <span className="text-3xl font-bold">K</span>
             </div>
-            <span className="text-3xl font-bold">FreshCart</span>
+            <span className="text-3xl font-bold">Klickit</span>
           </div>
           <h1 className="text-4xl font-bold mb-4">
             Manage Your Business on the Go
@@ -94,9 +94,9 @@ const Login = () => {
         <div className="w-full max-w-md animate-fade-in-up">
           <div className="lg:hidden flex items-center gap-2 mb-8 justify-center">
             <div className="h-10 w-10 rounded-xl gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground text-xl font-bold">F</span>
+              <span className="text-primary-foreground text-xl font-bold">K</span>
             </div>
-            <span className="text-2xl font-bold text-foreground">FreshCart</span>
+            <span className="text-2xl font-bold text-foreground">Klickit</span>
           </div>
 
           <div className="text-center mb-8">
@@ -191,7 +191,7 @@ const Login = () => {
           </div>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            New to FreshCart?{" "}
+            New to Klickit?{" "}
             <Link to="/register" className="font-medium text-primary hover:underline">
               Register your shop
             </Link>

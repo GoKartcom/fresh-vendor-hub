@@ -44,9 +44,9 @@ const Register = () => {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               <div className="h-9 w-9 rounded-xl gradient-primary flex items-center justify-center">
-                <span className="text-primary-foreground text-lg font-bold">F</span>
+                <span className="text-primary-foreground text-lg font-bold">K</span>
               </div>
-              <span className="text-xl font-bold text-foreground">FreshCart</span>
+              <span className="text-xl font-bold text-foreground">Klickit</span>
             </Link>
             <Link to="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground">
               Already registered? Login

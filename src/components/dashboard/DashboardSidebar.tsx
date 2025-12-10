@@ -43,9 +43,9 @@ export const DashboardSidebar = ({ collapsed, onToggle }: DashboardSidebarProps)
         {!collapsed && (
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground text-sm font-bold">F</span>
+              <span className="text-primary-foreground text-sm font-bold">K</span>
             </div>
-            <span className="font-bold text-foreground">FreshCart</span>
+            <span className="font-bold text-foreground">Klickit</span>
           </div>
         )}
         <Button
